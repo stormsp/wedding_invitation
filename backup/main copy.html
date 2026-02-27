@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иван и Варвара - Приглашение на свадьбу</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- СТРАНИЦА 2 - HERO СЦЕНА И ОСНОВНОЙ КОНТЕНТ -->
+    <section id="page2" class="page">
+        <!-- Hero с открытым конвертом -->
+        <div class="hero-envelope" id="heroEnvelope">
+            <img src="assets/2 страница/конверт2.png" alt="Конверт" class="envelope-open">
+            <img src="assets/2 страница/1 фото.png" alt="Фото 1" class="card photo1">
+            <img src="assets/2 страница/2 фото.png" alt="Фото 2" class="card photo2">
+            <img src="assets/2 страница/билет фон.png" alt="Билет фон" class="card ticket-bg">
+            <img src="assets/2 страница/билет.png" alt="Билет" class="card ticket">
+        </div>
+
+        <!-- Декоративные фоновые элементы -->
+        <div class="decorative-elements">
+            <img src="assets/2 страница/фон1.png" alt="Фон 1" class="decor decor-1">
+            <img src="assets/2 страница/фон дни.png" alt="Фон дни" class="decor decor-2">
+            <img src="assets/2 страница/сердце фон.png" alt="Сердце фон" class="decor decor-3">
+            <img src="assets/2 страница/цветы.png" alt="Цветы" class="decor decor-4">
+            <img src="assets/2 страница/цветы 2.png" alt="Цветы 2" class="decor decor-5">
+            <img src="assets/2 страница/цветы 3.png" alt="Цветы 3" class="decor decor-6">
+        </div>
+
+        <!-- Таймер обратного отсчета -->
+        <div class="countdown-section" id="countdown">
+            <div class="countdown-item">
+                <div class="countdown-value" id="days">0</div>
+                <div class="countdown-label">дней</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="hours">0</div>
+                <div class="countdown-label">часов</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="minutes">0</div>
+                <div class="countdown-label">минут</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="seconds">0</div>
+                <div class="countdown-label">секунд</div>
+            </div>
+        </div>
+
+        <!-- Блок приглашения -->
+        <div class="invitation-section scroll-fade">
+            <img src="assets/2 страница/Текст 1.png" alt="Текст 1" class="invitation-text">
+            <img src="assets/2 страница/Текст 2.png" alt="Текст 2" class="invitation-text">
+        </div>
+
+        <!-- Календарь -->
+        <div class="calendar-section scroll-fade">
+            <img src="assets/2 страница/календарь.png" alt="Календарь" class="calendar-main">
+            <div class="calendar-heart-container">
+                <img src="assets/2 страница/1 календарь.png" alt="1 календарь" class="calendar-number">
+                <img src="assets/2 страница/сердце календарь.png" alt="Сердце календарь" class="calendar-heart">
+            </div>
+        </div>
+
+        <!-- Локация -->
+        <div class="location-section scroll-fade">
+            <img src="assets/2 страница/текст 3.png" alt="Текст 3" class="location-text">
+            <img src="assets/2 страница/Текст 4.png" alt="Текст 4" class="location-text">
+            <img src="assets/2 страница/на карте.png" alt="На карте" class="map-image" id="mapButton">
+        </div>
+
+        <!-- План дня -->
+        <div class="schedule-section scroll-fade">
+            <img src="assets/2 страница/план дня.png" alt="План дня" class="schedule-title">
+            <div class="schedule-timeline">
+                <img src="assets/2 страница/расписание линия.png" alt="Линия" class="timeline-line">
+                <div class="schedule-items">
+                    <div class="schedule-item">
+                        <img src="assets/2 страница/расписание 1.png" alt="Расписание 1" class="schedule-image">
+                    </div>
+                    <div class="schedule-item">
+                        <img src="assets/2 страница/расписание 2.png" alt="Расписание 2" class="schedule-image">
+                    </div>
+                    <div class="schedule-item">
+                        <img src="assets/2 страница/расписание 3.png" alt="Расписание 3" class="schedule-image">
+                    </div>
+                </div>
+                <img src="assets/2 страница/линия конец.png" alt="Линия конец" class="timeline-end">
+            </div>
+        </div>
+
+        <!-- Дресс-код / Палитра -->
+        <div class="dresscode-section scroll-fade">
+            <img src="assets/2 страница/текст 6.png" alt="Текст 6" class="dresscode-text">
+            <img src="assets/2 страница/текст 7.png" alt="Текст 7" class="dresscode-text">
+            <div class="color-balls">
+                <img src="assets/2 страница/шар 1.png" alt="Шар 1" class="color-ball">
+                <img src="assets/2 страница/шар 2.png" alt="Шар 2" class="color-ball">
+                <img src="assets/2 страница/шар 3.png" alt="Шар 3" class="color-ball">
+                <img src="assets/2 страница/шар 4.png" alt="Шар 4" class="color-ball">
+            </div>
+        </div>
+
+        <!-- Финальный блок -->
+        <div class="final-section scroll-fade">
+            <img src="assets/2 страница/текст 8.png" alt="Текст 8" class="final-text">
+            <img src="assets/2 страница/текст 9.png" alt="Текст 9" class="final-text">
+            <img src="assets/2 страница/текст 10.png" alt="Текст 10" class="final-text">
+        </div>
+    </section>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+

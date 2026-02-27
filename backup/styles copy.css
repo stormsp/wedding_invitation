@@ -1,0 +1,667 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #f5f5f5;
+    --text-color: #333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--primary-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+.page {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========== СТРАНИЦА 1 - ОБЛОЖКА ========== */
+#page1 {
+    flex-direction: column;
+    padding: 0;
+    background: #ffffff;
+    justify-content: space-between;
+}
+
+.decorative-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.decor-iv {
+    position: absolute;
+    max-width: 250px;
+    width: 25%;
+    opacity: 0.12;
+    top: 15%;
+    right: 8%;
+    object-fit: contain;
+}
+
+.page1-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 6% 2rem 4%;
+}
+
+.title-image {
+    max-width: 60%;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.envelope-wrapper {
+    width: 100%;
+    max-width: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    flex: 1;
+    min-height: 0;
+}
+
+.envelope-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 100%;
+}
+
+.envelope-container:hover {
+    transform: scale(1.02);
+}
+
+.envelope {
+    max-width: 150%;
+    width: 150%;
+    max-width: 1500px;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+}
+
+.seal {
+    position: absolute;
+    max-width: 200px;
+    width: 28%;
+    height: auto;
+    object-fit: contain;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.hint {
+    max-width: 90%;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    object-fit: contain;
+    margin-top: 1rem;
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+/* ========== СТРАНИЦА 2 - HERO СЦЕНА ========== */
+#page2 {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background: linear-gradient(180deg, #fefefe 0%, #fafafa 50%, #f5f5f5 100%);
+}
+
+.hero-envelope {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 4rem auto 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+}
+
+.envelope-open {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    position: absolute;
+    max-width: 280px;
+    width: 30%;
+    height: auto;
+    object-fit: contain;
+    z-index: 2;
+    opacity: 0;
+}
+
+.card.photo1 {
+    top: 15%;
+    left: 10%;
+    transform-origin: center;
+}
+
+.card.photo2 {
+    top: 20%;
+    right: 12%;
+    transform-origin: center;
+}
+
+.card.ticket {
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    transform-origin: center;
+}
+
+/* Декоративные элементы */
+.decorative-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.decor {
+    position: absolute;
+    opacity: 0.15;
+    object-fit: contain;
+    max-width: 200px;
+}
+
+.decor-1 {
+    top: 5%;
+    left: 5%;
+    width: 15%;
+}
+
+.decor-2 {
+    top: 10%;
+    right: 8%;
+    width: 12%;
+}
+
+.decor-3 {
+    bottom: 20%;
+    left: 10%;
+    width: 10%;
+}
+
+.decor-4 {
+    top: 30%;
+    right: 5%;
+    width: 18%;
+}
+
+.decor-5 {
+    bottom: 30%;
+    right: 15%;
+    width: 14%;
+}
+
+.decor-6 {
+    top: 50%;
+    left: 3%;
+    width: 16%;
+}
+
+/* ========== ТАЙМЕР ========== */
+.countdown-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem auto;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.countdown-value {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #8b5a6b;
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ========== БЛОК ПРИГЛАШЕНИЯ ========== */
+.invitation-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.invitation-text {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ========== КАЛЕНДАРЬ ========== */
+.calendar-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.calendar-main {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.calendar-heart-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-number {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.calendar-heart {
+    position: absolute;
+    max-width: 60px;
+    width: 15%;
+    height: auto;
+    object-fit: contain;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* ========== ЛОКАЦИЯ ========== */
+.location-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.location-text {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.map-image {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.map-image:hover {
+    transform: scale(1.02);
+}
+
+/* ========== ПЛАН ДНЯ ========== */
+.schedule-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.schedule-title {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.schedule-timeline {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    max-width: 4px;
+    width: 4px;
+    height: 100%;
+    object-fit: contain;
+    z-index: 0;
+}
+
+.schedule-items {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.schedule-item {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+.schedule-image {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.timeline-end {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========== ДРЕСС-КОД / ПАЛИТРА ========== */
+.dresscode-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.dresscode-text {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.color-balls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.color-ball {
+    max-width: 120px;
+    width: 20%;
+    min-width: 80px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.color-ball:hover {
+    transform: scale(1.05);
+}
+
+/* ========== ФИНАЛЬНЫЙ БЛОК ========== */
+.final-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 4rem auto 6rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.final-text {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ========== SCROLL FADE ========== */
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+@media (max-width: 768px) {
+    .page1-content {
+        padding: 5% 1.5rem 5%;
+    }
+
+    .title-image {
+        max-width: 70%;
+        width: 100%;
+    }
+
+    .envelope-wrapper {
+        max-width: 100%;
+    }
+
+    .envelope {
+        max-width: 85%;
+    }
+
+    .seal {
+        max-width: 150px;
+        width: 26%;
+    }
+
+    .hint {
+        max-width: 75%;
+        width: 100%;
+    }
+
+    .decor-iv {
+        max-width: 180px;
+        width: 30%;
+        top: 12%;
+        right: 5%;
+    }
+
+    .hero-envelope {
+        margin: 2rem auto 4rem;
+        min-height: 400px;
+    }
+
+    .card {
+        max-width: 200px;
+        width: 35%;
+    }
+
+    .card.photo1 {
+        top: 10%;
+        left: 5%;
+    }
+
+    .card.photo2 {
+        top: 15%;
+        right: 5%;
+    }
+
+    .card.ticket {
+        bottom: 20%;
+    }
+
+    .countdown-section {
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .countdown-value {
+        font-size: 2rem;
+    }
+
+    .countdown-label {
+        font-size: 0.75rem;
+    }
+
+    .decor {
+        max-width: 120px;
+    }
+
+    .color-balls {
+        gap: 1rem;
+    }
+
+    .color-ball {
+        max-width: 80px;
+        min-width: 60px;
+    }
+
+    .schedule-items {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-section {
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+
+    .countdown-label {
+        font-size: 0.65rem;
+    }
+
+    .card {
+        max-width: 150px;
+    }
+
+    .color-balls {
+        gap: 0.5rem;
+    }
+
+    .color-ball {
+        max-width: 60px;
+        min-width: 50px;
+    }
+}
+
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+

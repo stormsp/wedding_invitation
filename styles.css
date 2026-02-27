@@ -1,0 +1,1496 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #f5f5f5;
+    --text-color: #333;
+    /* Fluid spacing: scale between mobile and desktop */
+    --space-xs: clamp(0.5rem, 2vw, 0.75rem);
+    --space-sm: clamp(0.75rem, 3vw, 1rem);
+    --space-md: clamp(1rem, 4vw, 1.5rem);
+    --space-lg: clamp(1.5rem, 6vw, 2rem);
+    --space-xl: clamp(2rem, 8vw, 3rem);
+    --space-2xl: clamp(3rem, 10vw, 4rem);
+    /* Safe area for notched devices (iPhone X+, Samsung with punch-hole) */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--primary-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    min-width: 320px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.page {
+    min-height: 100vh;
+    min-height: 100dvh; /* dynamic viewport height for mobile browsers */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
+}
+
+/* ========== СТРАНИЦА 1 - ОБЛОЖКА ========== */
+#page1 {
+    flex-direction: column;
+    padding: 0;
+    background: #ffffff;
+    justify-content: space-between;
+}
+
+.decorative-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.decor-iv {
+    position: absolute;
+    max-width: 250px;
+    width: 25%;
+    opacity: 0;
+    top: 15%;
+    right: 8%;
+    object-fit: contain;
+}
+
+.page1-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-width: min(1200px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) var(--space-md);
+    padding-top: calc(var(--space-lg) + var(--safe-top));
+    padding-bottom: calc(var(--space-lg) + var(--safe-bottom));
+    gap: var(--space-md);
+}
+
+.title-image {
+    max-width: min(60%, 400px);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    opacity: 0;
+}
+
+.envelope-block {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start; /* подсказка по левому краю конверта */
+    gap: var(--space-sm);
+}
+
+.envelope-container {
+    position: relative;
+    display: inline-block; /* контейнер подстраивается под размер конверта */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    max-width: min(750px, 95vw);
+    min-height: 44px;
+}
+
+.envelope-container:hover {
+    transform: scale(1.02);
+}
+
+.envelope {
+    display: block;
+    max-width: min(750px, 95vw);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+}
+
+/* Печатка: размер и позиция только относительно конверта (% от .envelope-container) */
+.seal {
+    position: absolute;
+    width: 20%;
+    height: auto;
+    object-fit: contain;
+    top: 58%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transform-origin: center center;
+}
+
+/* ИВ поверх печатки: размер меньше печатки, центр совпадает с печаткой */
+.decor-iv-overlay {
+    position: absolute;
+    width: 10%;
+    height: auto;
+    object-fit: contain;
+    top: 58%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+}
+
+.hint {
+    width: 52%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-top: 0;
+    margin-left: 14%; /* сдвиг вправо: надпись начинается от коричневого конверта, а не от края картинки */
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+/* ========== СТРАНИЦА 2 - HERO СЦЕНА ========== */
+#page2 {
+    flex-direction: column;
+    padding: var(--space-lg) var(--space-md);
+    padding-top: calc(var(--space-lg) + var(--safe-top));
+    padding-bottom: calc(var(--space-lg) + var(--safe-bottom));
+    position: relative;
+    background: #fff;
+    overflow-x: hidden;
+}
+
+/* Область конверта: высота задаётся конвертом; выходим за горизонтальные отступы секции, чтобы фон без белой полосы по бокам (в т.ч. на iPhone) */
+.page2-hero-wrap {
+    position: relative;
+    width: calc(100% + 2 * var(--space-md));
+    max-width: 100vw;
+    margin-left: calc(-1 * var(--space-md));
+    margin-right: calc(-1 * var(--space-md));
+}
+
+/* Общий фон (фон1.png): на всю ширину без белой рамки, заканчивается на 10% ниже конверта; поднят выше */
+.page2-bg {
+    position: absolute;
+    top: calc(-1 * (var(--space-lg) + var(--safe-top) + 1.5rem));
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: calc(110% + var(--space-lg) + var(--safe-top) + 1.5rem);
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.page2-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    display: block;
+    opacity: 1;
+}
+
+.hero-envelope {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: min(900px, 98vw);
+    margin: clamp(14rem, 42vw, 24rem) auto var(--space-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(320px, 50vmin, 500px);
+}
+
+/* Цветы 3: сзади конверта и фотографий, фоновый слой */
+.hero-flowers-bg {
+    position: absolute;
+    top: -35%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 108%;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+    object-position: center center;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.envelope-open {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+}
+
+.card {
+    position: absolute;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+}
+
+/* Фото: за билетом, перед конвертом. Левое фото (photo2) сзади, правое (photo1) спереди */
+.card.photo1 {
+    top: -22%;
+    right: 15%;
+    width: 52%;
+    max-width: 440px;
+    z-index: 2;
+    transform-origin: center;
+}
+
+.card.photo2 {
+    top: -6%;
+    left: 3%;
+    width: 54%;
+    max-width: 460px;
+    z-index: 3;
+    transform-origin: center;
+}
+
+/* Билет фон: поверх фото, под билетом с текстом */
+.card.ticket-bg {
+    bottom: 47%;
+    left: 45%;
+    transform: translateX(-50%);
+    transform-origin: center;
+    z-index: 5;
+    opacity: 0;
+    width: 60%;
+    max-width: none; /* не ограничивать: размер только от конверта */
+    min-width: unset;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Билет с текстом: размер от фона (30% при фоне 60%). Текст ниже: меньший bottom + сдвиг вниз в translate */
+.card.ticket {
+    bottom: 41%;
+    left: 52%;
+    transform: translate(-50%, 0);
+    transform-origin: center center;
+    z-index: 6;
+    width: 30%;
+    max-width: none;
+    min-width: unset;
+    height: auto;
+    object-fit: contain;
+    top: auto;
+}
+
+/* Цветы 2: правее билета, за билетом, перед фотографиями */
+.hero-flowers-2 {
+    position: absolute;
+    top: 11%;
+    right: 16%;
+    width: 32%;
+    max-width: 280px;
+    height: auto;
+    object-fit: contain;
+    object-position: right center;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Цветы поверх конверта и билета — выше всех фонов в hero */
+.hero-flowers {
+    position: absolute;
+    top: 21%;
+    left: -7%;
+    width: 36%;
+    max-width: 312px;
+    height: auto;
+    object-fit: contain;
+    object-position: left top;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Декоративные элементы (скрыты — убраны полупрозрачные блоки в начале страницы) */
+.decorative-elements {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.decor {
+    position: absolute;
+    opacity: 0.15;
+    object-fit: contain;
+    max-width: 200px;
+}
+
+.decor-1 {
+    top: 5%;
+    left: 5%;
+    width: 15%;
+}
+
+.decor-2 {
+    top: 10%;
+    right: 8%;
+    width: 12%;
+}
+
+.decor-3 {
+    bottom: 20%;
+    left: 10%;
+    width: 10%;
+}
+
+.decor-4 {
+    top: 30%;
+    right: 5%;
+    width: 18%;
+}
+
+.decor-5 {
+    bottom: 30%;
+    right: 15%;
+    width: 14%;
+}
+
+.decor-6 {
+    top: 50%;
+    left: 3%;
+    width: 16%;
+}
+
+/* ========== ТАЙМЕР (FlipDown) ========== */
+.timer-wrap.countdown-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-xl) 0;
+    margin: 0 auto;
+    max-width: min(800px, 96vw);
+    width: 100%;
+    overflow: visible;
+    min-width: 0;
+    background-image: url("assets/2 страница/фон дни.png");
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Убрать пробел между текст 9 и таймером */
+.final-section .timer-wrap.countdown-section {
+    margin-top: calc(-1 * var(--space-lg));
+}
+
+/* Обёртка: не обрезает тени/анимацию, не сужает таймер */
+.countdown-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+    min-width: 0;
+}
+
+/* Не переносить блоки — всегда одна линия. Без min-width 510px, чтобы на iPhone не обрезало при scale() */
+#flipdown {
+    white-space: nowrap;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    transform-origin: top center;
+    min-width: 0;
+    width: auto;
+    will-change: transform;
+}
+
+#flipdown .rotor-group {
+    flex: 0 0 auto;
+}
+
+@media (max-width: 540px) {
+    #flipdown {
+        transform: scale(0.92);
+    }
+}
+
+@media (max-width: 480px) {
+    #flipdown {
+        transform: scale(0.82);
+    }
+}
+
+@media (max-width: 420px) {
+    #flipdown {
+        transform: scale(0.72);
+    }
+}
+
+@media (max-width: 360px) {
+    #flipdown {
+        transform: scale(0.64);
+    }
+}
+
+/* На iPhone и узких экранах — таймер по центру, чуть левее */
+@media (max-width: 430px) {
+    .timer-wrap.countdown-section {
+        justify-content: center;
+        padding-left: max(var(--space-md), env(safe-area-inset-left));
+        padding-right: max(var(--space-md), env(safe-area-inset-right));
+    }
+
+    .countdown-wrap {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .timer-wrap #flipdown {
+        margin-left: 0;
+        margin-right: 10rem;
+    }
+}
+
+/* Размер и скругление карточек */
+.timer-wrap .flipdown .rotor,
+.timer-wrap .flipdown .rotor-leaf,
+.timer-wrap .flipdown .rotor-leaf-front,
+.timer-wrap .flipdown .rotor-leaf-rear {
+    border-radius: 8px;
+}
+
+/* Линия посередине как на макете */
+.timer-wrap .flipdown .rotor:after {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.timer-wrap .flipdown .rotor::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 3;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    pointer-events: none;
+}
+
+/* Убрать все точки/двоеточия между днями, часами, минутами, секундами */
+.timer-wrap .flipdown .rotor-group:first-child::after {
+    display: none;
+}
+
+.timer-wrap .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3)::before,
+.timer-wrap .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3)::after {
+    display: none;
+}
+
+/* Шрифт цифр таймера (Book Antiqua + фолбэки для iPhone) */
+.timer-wrap .flipdown .rotor,
+.timer-wrap .flipdown .rotor-top,
+.timer-wrap .flipdown .rotor-bottom,
+.timer-wrap .flipdown .rotor-leaf,
+.timer-wrap .flipdown .rotor-leaf-front,
+.timer-wrap .flipdown .rotor-leaf-rear {
+    font-family: "Book Antiqua", "Palatino Linotype", Palatino, Georgia, serif !important;
+    font-weight: 400;
+}
+
+/* Подписи таймера (ДНЕЙ, ЧАСОВ и т.д.) */
+.timer-wrap .flipdown .rotor-group-heading:before {
+    font-size: clamp(0.65rem, 2.2vw, 0.9rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #555;
+    opacity: 1;
+    font-family: "Book Antiqua", "Palatino Linotype", Palatino, Georgia, serif !important;
+}
+
+/* Цвета под макет (светлый фон) */
+.timer-wrap .flipdown.flipdown__theme-light .rotor,
+.timer-wrap .flipdown.flipdown__theme-light .rotor-top,
+.timer-wrap .flipdown.flipdown__theme-light .rotor-leaf-front {
+    color: #1a1a1a;
+    background-color: #f5f5f0;
+}
+
+.timer-wrap .flipdown.flipdown__theme-light .rotor-bottom,
+.timer-wrap .flipdown.flipdown__theme-light .rotor-leaf-rear {
+    color: #1a1a1a;
+    background-color: #f5f5f0;
+}
+
+.timer-wrap .flipdown.flipdown__theme-light .rotor:after {
+    border-top-color: rgba(0, 0, 0, 0.12);
+}
+
+.timer-wrap .flipdown.flipdown__theme-light .rotor-group-heading:before {
+    color: #555;
+}
+
+/* ========== БЛОК ПРИГЛАШЕНИЯ (Текст 1, Текст 2 — «Дорогие гости!» и др.) ========== */
+/* Текст всегда уже конверта (конверт: min(900px, 98vw)); отступ от фон1 увеличен */
+.invitation-section {
+    position: relative;
+    width: 100%;
+    max-width: min(900px, 96vw);
+    margin: clamp(4rem, 14vw, 7rem) auto 0;
+    margin-top: clamp(4rem, 14vw, 7rem);
+    padding: var(--space-lg);
+    padding-bottom: 0;
+    min-height: clamp(280px, 45vh, 420px);
+}
+
+.invitation-spacer {
+    display: none;
+}
+
+.invitation-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    /* Всегда меньше конверта (конверт max 900px / 98vw): 80% по ширине */
+    max-width: min(720px, 78vw);
+    width: max-content;
+    min-width: 0;
+    z-index: 1;
+}
+
+.invitation-flowers {
+    position: absolute;
+    right: clamp(-24rem, -54vw, -12rem);
+    top: 58%;
+    transform: translateY(-50%);
+    width: clamp(260px, 42vw, 480px);
+    height: auto;
+    object-fit: contain;
+    object-position: center right;
+    z-index: 0;
+}
+
+.invitation-text {
+    max-width: 100%;
+    width: 100%;
+    min-width: min(400px, 72vw);
+    height: auto;
+    object-fit: contain;
+}
+
+.invitation-content .invitation-text:first-child {
+    max-width: 72%;
+    width: 72%;
+    min-width: min(280px, 52vw);
+}
+
+/* Десктоп: текст приглашения ниже (больше отступ от конверта/фон1) */
+@media (min-width: 1025px) {
+    .invitation-section {
+        margin-top: clamp(8rem, 18vw, 12rem);
+    }
+}
+
+/* Планшет/телефон: текст приглашения выше */
+@media (max-width: 768px) {
+    .invitation-section {
+        margin-top: clamp(1.5rem, 5vw, 3rem);
+    }
+}
+
+/* iPhone и узкие телефоны: ещё выше */
+@media (max-width: 480px) {
+    .invitation-section {
+        margin-top: clamp(-3rem, -8vw, -1.5rem);
+    }
+
+    .invitation-flowers {
+        right: clamp(-12rem, -80vw, -2rem);
+    }
+}
+
+/* ========== КАЛЕНДАРЬ ========== */
+.calendar-section {
+    width: 100%;
+    max-width: min(600px, 96vw);
+    margin: clamp(-3rem, -6vw, -1.5rem) auto var(--space-xl);
+    padding: var(--space-lg);
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    position: relative;
+}
+
+@media (min-width: 1025px) {
+    .calendar-section {
+        margin-top: clamp(4rem, 10vw, 8rem);
+    }
+}
+
+.calendar-main {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.calendar-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.calendar-heart-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Ячейка 1 августа (суббота): сердце всегда в одном месте относительно календаря, размер в % — масштабируется с календарём */
+.calendar-heart-inner {
+    position: absolute;
+    left: 78%;
+    top: 43%;
+    transform: translate(-50%, -50%);
+    width: 14%;
+    max-width: 56px;
+}
+
+.calendar-heart-inner .calendar-heart {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* 1 всегда внутри сердца: позиция и размер относительно блока с сердцем, двигается и масштабируется вместе с сердцем */
+.calendar-heart-inner .calendar-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 1 всегда внутри сердца: позиция и размер относительно блока с сердцем, двигается и масштабируется вместе с сердцем */
+.calendar-heart-inner .calendar-number {
+    position: absolute;
+    top: -5%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 23%;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.calendar-number {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 480px) {
+    .calendar-heart-inner {
+        width: 10%;
+        max-width: 36px;
+        left: 77.5%;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* ========== ЛОКАЦИЯ ========== */
+.location-section {
+    position: relative;
+    width: 100%;
+    max-width: min(900px, 96vw);
+    margin: 0 auto var(--space-2xl);
+    padding: var(--space-lg);
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.location-flowers-bg {
+    position: absolute;
+    left: clamp(-20rem, -50vw, -0.5rem);
+    bottom: clamp(-30rem, -60vw, -1rem);
+    width: clamp(300px, 32vw, 260px);
+    height: auto;
+    object-fit: contain;
+    object-position: left bottom;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@media (min-width: 1025px) {
+    .location-flowers-bg {
+        width: clamp(380px, 42vw, 420px);
+        bottom: clamp(-40rem, -20vw, -1.5rem);
+        left: clamp(-40rem, -14vw, -2rem);
+    }
+}
+
+.location-text {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.location-section .location-title {
+    max-width: min(52%, 320px) !important;
+    width: 52% !important;
+}
+
+.location-section .location-text:nth-child(3) {
+    max-width: 88%;
+    width: 88%;
+}
+
+.map-image {
+    position: relative;
+    z-index: 1;
+    max-width: 35%;
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    min-height: 44px; /* touch target */
+}
+
+.map-image:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 480px) {
+    .location-section .location-title {
+        max-width: min(55%, 180px) !important;
+        width: 55% !important;
+    }
+
+    .location-section .location-text:nth-child(3) {
+        max-width: 96%;
+        width: 96%;
+    }
+
+    .map-image {
+        max-width: 55%;
+        width: 88%;
+    }
+}
+
+/* ========== ПЛАН ДНЯ ========== */
+.schedule-section {
+    width: 100%;
+    max-width: min(800px, 96vw);
+    margin: var(--space-md) auto var(--space-2xl);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.schedule-title {
+    max-width: 50%;
+    width: 78%;
+    height: auto;
+    object-fit: contain;
+}
+
+.schedule-timeline {
+    position: relative;
+    width: 100%;
+    max-width: min(600px, 92vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.schedule-stack {
+    position: relative;
+    width: 100%;
+    max-width: min(500px, 92vw);
+    display: block;
+}
+
+.schedule-heart-bg {
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.schedule-layer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    opacity: 0;
+    transform: translateX(calc(-50% - 50px));
+}
+
+.schedule-stack.animate-in .schedule-layer {
+    animation: schedule-slide-in-center 0.6s ease-out both;
+}
+
+.schedule-layer-1 {
+    z-index: 0;
+    position: relative;
+    left: auto;
+    width: 100%;
+    transform: translateX(-50px);
+}
+
+.schedule-stack.animate-in .schedule-layer-1 {
+    animation: schedule-slide-in-left 0.6s ease-out 0s both;
+}
+
+.schedule-layer-2 {
+    z-index: 1;
+}
+
+.schedule-stack.animate-in .schedule-layer-2 {
+    animation: schedule-slide-in-center 0.6s ease-out 0.4s both;
+}
+
+.schedule-layer-3 {
+    z-index: 2;
+}
+
+.schedule-stack.animate-in .schedule-layer-3 {
+    animation: schedule-slide-in-center 0.6s ease-out 0.8s both;
+}
+
+.schedule-layer-line {
+    z-index: 3;
+}
+
+.schedule-stack.animate-in .schedule-layer-line {
+    animation: schedule-slide-in-center 0.6s ease-out 1.2s both;
+}
+
+@keyframes schedule-slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes schedule-slide-in-center {
+    from {
+        opacity: 0;
+        transform: translateX(calc(-50% - 50px));
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+}
+
+.schedule-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.schedule-items .schedule-image {
+    display: block;
+    width: 100%;
+    max-width: min(500px, 92vw);
+    height: auto;
+    object-fit: contain;
+}
+
+.schedule-item {
+    width: 100%;
+    max-width: min(500px, 96vw);
+    display: flex;
+    justify-content: center;
+}
+
+.schedule-image {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.timeline-end {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========== ДРЕСС-КОД / КОНЦЕПЦИЯ СВАДЬБЫ ========== */
+.dresscode-section {
+    width: 100%;
+    max-width: min(900px, 96vw);
+    margin: var(--space-2xl) auto var(--space-xs);
+    padding: var(--space-lg);
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.dresscode-title {
+    max-width: 62%;
+    width: 62%;
+    height: auto;
+    object-fit: contain;
+}
+
+.dresscode-subtitle {
+    max-width: 68%;
+    width: 68%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+    .dresscode-title {
+        max-width: 82%;
+        width: 82%;
+    }
+
+    .dresscode-subtitle {
+        max-width: 88%;
+        width: 88%;
+    }
+}
+
+.dresscode-palette-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-xs);
+    width: 100%;
+    max-width: min(500px, 90vw);
+    margin: 0 auto;
+    margin-top: calc(-1 * var(--space-md));
+}
+
+.dresscode-palette-row .color-balls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: clamp(0.35rem, 3vw, 1.25rem);
+    flex-wrap: nowrap;
+}
+
+.dresscode-palette-label {
+    max-width: clamp(60px, 10vw, 100px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    align-self: center;
+    margin-left: auto;
+}
+
+.dresscode-text {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.color-balls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.5rem, 4vw, 2rem);
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.color-ball {
+    max-width: clamp(60px, 19vw, 115px);
+    width: 20%;
+    min-width: 60px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.dresscode-palette-row.animate-in .color-ball {
+    animation: ball-appear 0.5s ease-out both;
+}
+
+.dresscode-palette-row.animate-in .color-ball:nth-child(1) { animation-delay: 0.25s; }
+.dresscode-palette-row.animate-in .color-ball:nth-child(2) { animation-delay: 0.5s; }
+.dresscode-palette-row.animate-in .color-ball:nth-child(3) { animation-delay: 0.75s; }
+.dresscode-palette-row.animate-in .color-ball:nth-child(4) { animation-delay: 1s; }
+
+@keyframes ball-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.color-ball:hover {
+    transform: scale(1.05);
+}
+
+/* ========== ФИНАЛЬНЫЙ БЛОК ========== */
+.final-section {
+    width: 100%;
+    max-width: min(900px, 96vw);
+    margin: var(--space-sm) auto var(--space-2xl);
+    padding: var(--space-lg);
+    padding-top: var(--space-sm);
+    padding-bottom: calc(var(--space-2xl) + var(--safe-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.final-text {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.final-section .final-text:nth-of-type(2) {
+    max-width: 72%;
+    width: 72%;
+    margin-top: clamp(3rem, 12vw, 6rem);
+}
+
+/* На компьютере — текст 8, 9, 10 меньше */
+@media (min-width: 769px) {
+    .final-section .final-text {
+        max-width: 58%;
+        width: 58%;
+    }
+
+    .final-section .final-text:nth-of-type(1) {
+        max-width: 65%;
+        width: 65%;
+    }
+
+    .final-section .final-text:nth-of-type(2) {
+        max-width: 50%;
+        width: 50%;
+    }
+}
+
+/* На iPhone — текст 10 меньше и ближе к таймеру */
+@media (max-width: 430px) {
+    .final-section .final-text:nth-of-type(3) {
+        max-width: 70%;
+        width: 70%;
+        margin-top: calc(-1 * var(--space-md));
+    }
+}
+
+/* ========== SCROLL FADE ========== */
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+/* Планшеты и маленькие ноутбуки */
+@media (max-width: 1024px) {
+    .hero-envelope {
+        min-height: clamp(280px, 45vmin, 450px);
+    }
+}
+
+/* Планшеты портрет / большие телефоны */
+@media (max-width: 768px) {
+    .page1-content {
+        padding: var(--space-md) var(--space-sm);
+        padding-top: calc(var(--space-md) + var(--safe-top));
+        padding-bottom: calc(var(--space-md) + var(--safe-bottom));
+        gap: var(--space-sm);
+    }
+
+    .title-image {
+        max-width: min(75%, 320px);
+    }
+
+    .envelope {
+        max-width: 92%;
+        width: 92%;
+    }
+
+    .decor-iv {
+        max-width: clamp(80px, 20vw, 120px);
+        top: 10%;
+        right: 3%;
+    }
+
+    .hero-envelope {
+        margin: clamp(12rem, 38vw, 20rem) auto var(--space-2xl);
+        min-height: clamp(280px, 55vmin, 400px);
+    }
+
+    .hero-flowers-bg {
+        top: -30%;
+        width: 110%;
+    }
+
+    .hero-flowers {
+        top: 21%;
+        left: -6%;
+        width: 34%;
+        max-width: 260px;
+    }
+
+    .hero-flowers-2 {
+        top: 11%;
+        right: 17%;
+        width: 30%;
+        max-width: 240px;
+    }
+
+    .card.photo1 {
+        top: -22%;
+        right: 14%;
+        width: 50%;
+        max-width: 400px;
+        z-index: 1;
+    }
+
+    .card.photo2 {
+        top: -6%;
+        left: 3%;
+        width: 52%;
+        max-width: 400px;
+        z-index: 2;
+    }
+
+    .card.ticket-bg {
+        bottom: 47%;
+    }
+
+    .card.ticket {
+        bottom: 41%;
+        left: 52%;
+        top: auto;
+        transform: translate(-50%, 0);
+    }
+
+    .decor {
+        max-width: clamp(80px, 15vw, 120px);
+    }
+
+    .color-ball {
+        max-width: clamp(56px, 18vw, 80px);
+        min-width: 56px;
+    }
+
+    .schedule-items {
+        gap: var(--space-md);
+    }
+}
+
+/* Телефоны (iPhone 12/13/14, Samsung S21 и т.д.) */
+@media (max-width: 480px) {
+    .page1-content {
+        padding: var(--space-sm) var(--space-xs);
+        padding-top: calc(var(--space-sm) + var(--safe-top));
+        padding-bottom: calc(var(--space-sm) + var(--safe-bottom));
+        gap: var(--space-xs);
+    }
+
+    .page2-hero-wrap {
+        width: 100vw;
+        max-width: none;
+        margin-left: calc(-1 * var(--space-md));
+    }
+
+    .page2-bg {
+        height: 110%;
+    }
+
+    .title-image {
+        max-width: min(82%, 280px);
+    }
+
+    .envelope {
+        max-width: 96%;
+        width: 96%;
+    }
+
+    .hero-flowers-bg {
+        top: -42%;
+        width: 111%;
+    }
+
+    .hero-flowers {
+        top: 21%;
+        left: -7%;
+        width: 35%;
+        max-width: 260px;
+    }
+
+    .hero-flowers-2 {
+        top: 11%;
+        right: 15%;
+        width: 30%;
+        max-width: 220px;
+    }
+
+    .card.photo1 {
+        top: -20%;
+        right: 12%;
+        width: 48%;
+        max-width: 340px;
+        z-index: 1;
+    }
+
+    .card.photo2 {
+        top: -5%;
+        left: 2%;
+        width: 50%;
+        max-width: 320px;
+        z-index: 2;
+    }
+
+    .card.ticket-bg {
+        bottom: 47%;
+    }
+
+    .card.ticket {
+        bottom: 35%;
+        left: 52%;
+        top: auto;
+        transform: translate(-50%, 0);
+    }
+
+    .color-ball {
+        max-width: clamp(48px, 22vw, 64px);
+        min-width: 48px;
+    }
+}
+
+/* Маленькие телефоны (iPhone SE, Galaxy A и т.д.) */
+@media (max-width: 360px) {
+    .page1-content {
+        padding: var(--space-xs);
+        padding-top: calc(var(--space-xs) + var(--safe-top));
+        padding-bottom: calc(var(--space-xs) + var(--safe-bottom));
+    }
+
+    .page2-hero-wrap {
+        width: 100vw;
+        max-width: none;
+        margin-left: calc(-1 * var(--space-md));
+    }
+
+    .page2-bg {
+        height: 108%;
+    }
+
+    .title-image {
+        max-width: 88%;
+    }
+
+    .envelope {
+        max-width: 98%;
+        width: 98%;
+    }
+
+    .hero-flowers-bg {
+        top: -22%;
+        width: 112%;
+    }
+
+    .hero-flowers {
+        top: 22%;
+        left: -5%;
+        width: 33%;
+        max-width: 220px;
+    }
+
+    .hero-flowers-2 {
+        top: 11%;
+        right: 9%;
+        width: 28%;
+        max-width: 200px;
+    }
+
+    .card.photo1 {
+        top: -18%;
+        right: 10%;
+        width: 46%;
+        max-width: 300px;
+        z-index: 1;
+    }
+
+    .card.photo2 {
+        top: -4%;
+        left: 2%;
+        width: 48%;
+        max-width: 280px;
+        z-index: 2;
+    }
+
+    .card.ticket-bg {
+        bottom: 46%;
+    }
+
+    .card.ticket {
+        bottom: 33%;
+        left: 52%;
+        top: auto;
+        transform: translate(-50%, 0);
+    }
+
+    .timer-wrap.countdown-section {
+        padding: var(--space-sm);
+    }
+
+    .timer-wrap .flipdown .rotor {
+        font-size: 2rem;
+    }
+
+    .color-ball {
+        max-width: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Высокие экраны (например узкий телефон в альбомной ориентации) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .page1-content {
+        padding: var(--space-xs) var(--space-md);
+        gap: var(--space-xs);
+    }
+
+    .title-image {
+        max-width: min(35%, 220px);
+    }
+
+    .envelope-container {
+        max-width: 45vh;
+    }
+
+    .envelope {
+        max-width: 45vh;
+        width: 45vh;
+    }
+
+    .hero-envelope {
+        min-height: 80vh;
+    }
+}
+
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
