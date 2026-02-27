@@ -58,14 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 1,
             ease: 'power2.out',
             onComplete: () => {
-                // После завершения анимации появления начинаем вращение печатки
+                // Убираем inline transform от GSAP, чтобы применились стили из CSS
                 if (seal) {
-                    gsap.to(seal, {
-                        rotation: 360,
-                        duration: 20,
-                        ease: 'none',
-                        repeat: -1
-                    });
+                    gsap.set(seal, { clearProps: 'transform' });
+                    seal.classList.add('seal-rotating');
                 }
             }
         });
@@ -93,11 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (titleImage) {
             gsap.set(titleImage, { opacity: 1, filter: 'blur(0px)' });
         }
-        gsap.set([envelope, seal, decorIV, hint], { 
-            opacity: 1, 
-            y: 0, 
-            filter: 'blur(0px)' 
+        gsap.set([envelope, seal, decorIV, hint], {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)'
         });
+        if (seal) {
+            gsap.set(seal, { clearProps: 'transform' });
+        }
     }
 
     // Обработчик клика на конверт

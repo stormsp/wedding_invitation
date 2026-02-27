@@ -153,6 +153,16 @@ img {
     transform-origin: center center;
 }
 
+/* Вращение печатки через CSS (без inline style от JS — одинаково в Chrome и Safari) */
+.seal.seal-rotating {
+    animation: seal-rotate 20s linear infinite;
+}
+
+@keyframes seal-rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 /* ИВ поверх печатки: размер меньше печатки, центр совпадает с печаткой */
 .decor-iv-overlay {
     position: absolute;
